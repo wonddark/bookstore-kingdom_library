@@ -1,0 +1,16 @@
+.home-hero-container{
+    min-height: calc(100vh - 56px);
+}
+.home-hero-image {
+    font-size: 30vw;
+}
+
+.search-form-btn{
+    padding-right: 15px;
+    padding-left: 15px;
+    cursor: pointer;
+}
+
+.search-form-btn:hover{
+    box-shadow: 0 0 3px 1px rgba(211, 211, 211, 45%);
+}

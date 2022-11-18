@@ -16,6 +16,7 @@ import {
 } from "reactstrap";
 import { ReactComponent as BooksLover } from "../../assets/undraw_book_lover_re_rwjy.svg";
 import { useState } from "react";
+import "./Home.css";
 
 function Home() {
   const [isOpen, setIsOpen] = useState(false);
@@ -24,20 +25,17 @@ function Home() {
   };
   return (
     <Container fluid className="p-0">
-      <header className="bg-primary bg-gradient">
+      <header>
         <Navbar expand="md" dark color="primary" sticky="top" container="xl">
           <NavbarBrand>Kingdom Library</NavbarBrand>
           <NavbarToggler onClick={toggleIsOpen} />
           <Collapse isOpen={isOpen} navbar>
             <Nav navbar className="mt-3 mt-md-0 ms-auto">
-              <Form className="me-md-2 mb-2 mb-md-0">
-                <InputGroup>
-                  <Input type="search" placeholder="Try to find it" />
-                  <InputGroupText className="bg-success border-success">
-                    <i className="bi bi-search text-light" />
-                  </InputGroupText>
-                </InputGroup>
-              </Form>
+              <NavItem>
+                <NavLink href="/" className="text-warning">
+                  New
+                </NavLink>
+              </NavItem>
               <NavItem>
                 <NavLink href="/authenticate">Login</NavLink>
               </NavItem>
@@ -47,45 +45,50 @@ function Home() {
             </Nav>
           </Collapse>
         </Navbar>
-        <Container fluid="xl" className="my-5 py-5">
+      </header>
+      <Container
+        fluid
+        className="p-0 bg-primary bg-gradient home-hero-container"
+      >
+        <Container fluid="xl" className="py-3 py-md-5">
           <Row>
-            <Col xl={8} className="mt-5 pt-5">
-              <h4 className="display-6 mb-3">Welcome to our Kingdom Library</h4>
-              <p className="lead">
+            <Col
+              lg={8}
+              xl={7}
+              className="mt-4 mt-lg-2 pt-lg-5 order-1 order-lg-0"
+            >
+              <h4 className="display-6 mb-3 text-center text-lg-start">
+                Welcome to our Kingdom Library
+              </h4>
+              <p className="lead d-none d-lg-block">
                 We have gathered thousands of titles to feed your knowledge.
                 Feel free to look around, you will find for sure something that
                 grabs your attention but also, if you know what are yo looking
                 you can use our modest search
               </p>
+              <p className="lead d-block d-lg-none text-center text-lg-start">
+                Thousands of titles gathered to feed your knowledge. Look around
+                and find something interesting for you.
+              </p>
+              <Form className="mt-5">
+                <InputGroup>
+                  <Input
+                    type="search"
+                    placeholder="Try to find something interesting"
+                    bsSize="lg"
+                  />
+                  <InputGroupText className="bg-success border-success search-form-btn">
+                    <i className="bi bi-search text-light" />
+                  </InputGroupText>
+                </InputGroup>
+              </Form>
             </Col>
-            <Col>
-              <BooksLover style={{ fontSize: "320px" }} />
+            <Col className="order-0 order-lg-1 text-center">
+              <BooksLover className="home-hero-image" />
             </Col>
           </Row>
         </Container>
-      </header>
-      <Container fluid="xl">
-        <h3>Here will go our newest acquisitions</h3>
-        {[1, 2, 3, 4, 5, 6, 7, 8, 9].map((item) => (
-          <span key={item}>{item}</span>
-        ))}
       </Container>
-      <footer className="bg-dark text-light py-3">
-        <Container fluid="xl">
-          <Row>
-            <Col xl={5}>
-              <p className="lead fs-6">Kingdom Library</p>
-              <p className="lead fs-6">
-                Biplanta #7b, Micro 7, Distrito José Martí, Santiago de Cuba,
-                Cuba
-              </p>
-              <p className="lead fs-6">
-                Zip code: <strong>10605</strong>
-              </p>
-            </Col>
-          </Row>
-        </Container>
-      </footer>
     </Container>
   );
 }
