@@ -1,0 +1,12 @@
+.right-pagination{
+    justify-content: flex-end;
+}
+
+.books-list {
+    height: calc(100vh - 176px);
+    overflow-y: auto;
+}
+
+.books-list.paginated {
+    height: calc(100vh - 238px);
+}
