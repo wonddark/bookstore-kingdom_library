@@ -10,7 +10,6 @@ import {
   selectSearching,
 } from "../../state/books.slice";
 import { useEffect, useState } from "react";
-import "./BooksHome.css";
 import Pagination from "./Pagination";
 
 function BooksHome() {
@@ -18,7 +17,6 @@ function BooksHome() {
   const state = useAppSelector((state) => state);
   const searching = selectSearching(state);
   const page = selectPage(state);
-  console.log(page);
   const query = selectQuery(state);
   const paginate = selectPaginate(state);
   const { data: newBooks, isLoading: loadingNewBooks } = useGetBooksQuery(
@@ -56,7 +54,7 @@ function BooksHome() {
         lg={3}
         xl={4}
         xxl={5}
-        className={`g-4 mt-2 mb-4 books-list${paginate ? " paginated" : ""}`}
+        className={`books-list${paginate ? " paginated" : ""}`}
       >
         {data.map((item: any) => (
           <Col key={item.isbn13}>
