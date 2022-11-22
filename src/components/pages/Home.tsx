@@ -1,11 +1,10 @@
 import { Col, Container, Row } from "reactstrap";
 import { ReactComponent as BooksLover } from "../../assets/undraw_book_lover_re_rwjy.svg";
-import "./Home.css";
 import SearchForm from "../widgets/SearchForm";
 
 function Home() {
   return (
-    <Container fluid className="p-0 bg-primary bg-gradient home-hero-container">
+    <Container fluid className="home-hero-container">
       <Container fluid="xl" className="py-3 py-md-5">
         <Row>
           <Col
@@ -26,7 +25,9 @@ function Home() {
               Thousands of titles gathered to feed your knowledge. Look around
               and find something interesting for you.
             </p>
-            <SearchForm />
+            <div className="mt-5">
+              <SearchForm />
+            </div>
           </Col>
           <Col className="order-0 order-lg-1 text-center">
             <BooksLover className="home-hero-image" />
