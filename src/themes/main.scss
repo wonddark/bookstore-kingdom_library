@@ -1,0 +1,95 @@
+@import "../../node_modules/bootstrap/scss/functions";
+
+$purple: #6f42c1;
+$teal: #20c997;
+
+$purple-50: tint-color($purple, 91.5%);
+$purple-100: tint-color($purple, 80%);
+$purple-200: tint-color($purple, 60%);
+$purple-300: tint-color($purple, 40%);
+$purple-400: tint-color($purple, 20%);
+$purple-500: $purple;
+$purple-600: shade-color($purple, 20%);
+$purple-700: shade-color($purple, 40%);
+$purple-800: shade-color($purple, 60%);
+$purple-900: shade-color($purple, 80%);
+
+$teal-100: tint-color($teal, 80%);
+$teal-200: tint-color($teal, 60%);
+$teal-300: tint-color($teal, 40%);
+$teal-400: tint-color($teal, 20%);
+$teal-500: $teal;
+$teal-600: shade-color($teal, 20%);
+$teal-700: shade-color($teal, 40%);
+$teal-800: shade-color($teal, 60%);
+$teal-900: shade-color($teal, 80%);
+
+
+$primary: $purple;
+$success: $teal;
+$navbar-dark: $purple-700;
+$hero-light: $purple-300;
+
+$body-bg: $purple-50;
+$body-color: $purple-900;
+
+@import "../../node_modules/bootstrap/scss/variables";
+
+$custom-colors: (
+        "navbar-dark": $navbar-dark,
+        "hero-light": $hero-light
+);
+
+$theme-colors: map-merge($theme-colors, $custom-colors);
+
+@import "../../node_modules/bootstrap/scss/mixins";
+@import "../../node_modules/bootstrap/scss/maps";
+@import "../../node_modules/bootstrap/scss/root";
+@import "../../node_modules/bootstrap/scss/reboot";
+@import "../../node_modules/bootstrap/scss/type";
+@import "../../node_modules/bootstrap/scss/grid";
+@import "../../node_modules/bootstrap/scss/card";
+@import "../../node_modules/bootstrap/scss/buttons";
+@import "../../node_modules/bootstrap/scss/forms";
+@import "../../node_modules/bootstrap/scss/nav";
+@import "../../node_modules/bootstrap/scss/navbar";
+@import "../../node_modules/bootstrap/scss/pagination";
+@import "../../node_modules/bootstrap/scss/containers";
+@import "../../node_modules/bootstrap/scss/images";
+@import "../../node_modules/bootstrap/scss/bootstrap-utilities";
+
+.home-hero-container {
+  min-height: calc(100vh - 56px);
+  background-color: $hero-light;
+  background-image: radial-gradient(ellipse at left top, rgba(255, 255, 255, 0), rgba(255, 255, 255, .15));
+  padding: 0;
+}
+
+.home-hero-image {
+  font-size: 30vw;
+}
+
+.search-form-btn {
+  padding-right: $btn-padding-x-lg !important;
+  padding-left: $btn-padding-x-lg !important;
+  background-color: $success;
+  border: $btn-border-width;
+  border-radius: $btn-border-radius-lg;
+}
+
+.right-pagination {
+  justify-content: flex-end;
+}
+
+.books-list {
+  --bs-gutter-x: 1.5rem;
+  --bs-gutter-y: 1.5rem;
+  height: calc(100vh - 176px);
+  overflow-y: auto;
+  margin-top: $spacer * .5;
+  margin-bottom: $spacer * 1.5;
+}
+
+.books-list.paginated {
+  height: calc(100vh - 238px);
+}
