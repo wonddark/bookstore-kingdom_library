@@ -22,7 +22,7 @@ function Pagination() {
     <Row className="mt-2">
       <Col>
         <BsPagination listClassName="right-pagination">
-          <PaginationItem>
+          <PaginationItem disabled={page === 1}>
             <PaginationLink previous onClick={previousPage}>
               <i className="bi bi-chevron-double-left me-2" />
               Previous
