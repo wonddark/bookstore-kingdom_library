@@ -18,13 +18,19 @@ function Skeleton({ children }: { children: ReactElement }) {
   return (
     <Container fluid className="p-0">
       <header>
-        <Navbar expand="md" dark color="primary" sticky="top" container="xl">
+        <Navbar
+          expand="md"
+          dark
+          color="navbar-dark"
+          sticky="top"
+          container="xl"
+        >
           <NavbarBrand href="/">Kingdom Library</NavbarBrand>
           <NavbarToggler onClick={toggleIsOpen} />
           <Collapse isOpen={isOpen} navbar>
             <Nav navbar className="mt-3 mt-md-0 ms-auto">
               <NavItem>
-                <NavLink href="/books" className="text-warning">
+                <NavLink href="/books" className="link-success">
                   Latest
                 </NavLink>
               </NavItem>
