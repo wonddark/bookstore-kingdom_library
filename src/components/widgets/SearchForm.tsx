@@ -1,5 +1,4 @@
 import { Button, Form, Input, InputGroup } from "reactstrap";
-import "./SearchForm.css";
 import { useLazySearchBooksQuery } from "../../state/api";
 import { ChangeEvent, FormEvent, useState } from "react";
 import { useAppDispatch, useAppSelector } from "../../state/hooks";
