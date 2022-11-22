@@ -17,14 +17,8 @@ function Skeleton({ children }: { children: ReactElement }) {
   };
   return (
     <Container fluid className="p-0">
-      <header>
-        <Navbar
-          expand="md"
-          dark
-          color="navbar-dark"
-          sticky="top"
-          container="xl"
-        >
+      <header className="sticky-top">
+        <Navbar expand="md" dark color="navbar-dark" container="xl">
           <NavbarBrand href="/">Kingdom Library</NavbarBrand>
           <NavbarToggler onClick={toggleIsOpen} />
           <Collapse isOpen={isOpen} navbar>
