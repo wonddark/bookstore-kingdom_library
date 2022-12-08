@@ -1,9 +1,9 @@
 import { useEffect } from "react";
-import { logoutKeycloak } from "../../services/keycloak.service";
+import { loginKeycloak } from "../../services/keycloak.service";
 
 function Authentication() {
   useEffect(() => {
-    logoutKeycloak();
+    loginKeycloak();
   }, []);
   return null;
 }
