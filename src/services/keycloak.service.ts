@@ -1,6 +1,6 @@
 import keycloak from "keycloak-js";
 import { store } from "../state/store";
-import { login, logout } from "../state/session.slice";
+import { login, logout, toggleAuthenticating } from "../state/session.slice";
 import jwtDecoder from "jwt-decode";
 
 const keycloakService = new keycloak({
@@ -10,11 +10,14 @@ const keycloakService = new keycloak({
 });
 
 export const initKeycloak = () => {
-  keycloakService.init({
-    onLoad: "check-sso",
-    silentCheckSsoRedirectUri: window.location.origin + "/",
-    checkLoginIframe: false,
-  });
+  store.dispatch(toggleAuthenticating());
+  keycloakService
+    .init({
+      onLoad: "check-sso",
+      silentCheckSsoRedirectUri: window.location.origin + "/",
+      checkLoginIframe: false,
+    })
+    .then(() => store.dispatch(toggleAuthenticating()));
 };
 
 export const loginKeycloak = () => {
