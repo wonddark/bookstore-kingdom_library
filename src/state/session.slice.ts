@@ -6,12 +6,24 @@ type SessionState = {
   token: string;
   refreshToken: string;
   userId: string;
+  preferred_username: string | undefined;
+  picture: string | undefined;
+  name: string | undefined;
+  given_name: string | undefined;
+  family_name: string | undefined;
+  email: string | undefined;
 };
 const initialState: SessionState = {
   authenticated: false,
   token: "",
   refreshToken: "",
   userId: "",
+  email: undefined,
+  family_name: undefined,
+  given_name: undefined,
+  name: undefined,
+  picture: undefined,
+  preferred_username: undefined,
 };
 export const SESSION_STORE_KEY = "session";
 const sessionSlice = createSlice({
@@ -26,12 +38,24 @@ const sessionSlice = createSlice({
         token: string;
         refreshToken: string;
         userId: string;
+        preferred_username: string | undefined;
+        picture: string | undefined;
+        name: string | undefined;
+        given_name: string | undefined;
+        family_name: string | undefined;
+        email: string | undefined;
       }>
     ) => {
       state.authenticated = true;
       state.token = payload.token;
       state.refreshToken = payload.refreshToken;
       state.userId = payload.userId;
+      state.preferred_username = payload.preferred_username;
+      state.picture = payload.picture;
+      state.name = payload.name;
+      state.given_name = payload.given_name;
+      state.family_name = payload.family_name;
+      state.email = payload.email;
     },
     logout: () => initialState,
   },

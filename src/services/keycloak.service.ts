@@ -1,7 +1,7 @@
 import keycloak from "keycloak-js";
 import { store } from "../state/store";
 import { login, logout } from "../state/session.slice";
-import { LOCATION_STORE_KEY } from "../state/location.slice";
+import jwtDecoder from "jwt-decode";
 
 const keycloakService = new keycloak({
   url: "https://auth.gyfted.io/",
@@ -12,9 +12,7 @@ const keycloakService = new keycloak({
 export const initKeycloak = () => {
   keycloakService.init({
     onLoad: "check-sso",
-    redirectUri:
-      window.location.origin +
-      (store.getState()[LOCATION_STORE_KEY].location || "/"),
+    silentCheckSsoRedirectUri: window.location.origin + "/",
     checkLoginIframe: false,
   });
 };
@@ -28,11 +26,27 @@ export const logoutKeycloak = () => {
 };
 
 keycloakService.onAuthSuccess = () => {
+  const { preferred_username, picture, name, given_name, family_name, email } =
+    jwtDecoder(`${keycloakService.token}`) as {
+      preferred_username: string;
+      picture: string | undefined;
+      name: string;
+      given_name: string;
+      family_name: string;
+      email: string;
+    };
+
   store.dispatch(
     login({
       token: `${keycloakService.token}`,
       refreshToken: `${keycloakService.refreshToken}`,
       userId: `${keycloakService.subject}`,
+      preferred_username,
+      picture,
+      name,
+      given_name,
+      family_name,
+      email,
     })
   );
 };
