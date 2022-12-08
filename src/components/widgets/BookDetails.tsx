@@ -34,6 +34,11 @@ function BookDetails() {
           <Col xs={12} md={3} className="text-center mb-4">
             <img src={data.image} alt="book-portrait" className="img-fluid" />
             <span className="d-block w-100 fs-5">ISBN: {data.isbn13}</span>
+            <div className="mt-2">
+              <button className="btn btn-primary">
+                <i className="bi bi-cart-plus me-2" /> Poner en la cesta
+              </button>
+            </div>
           </Col>
           <Col>
             <h1>{he.decode(data.title)}</h1>
