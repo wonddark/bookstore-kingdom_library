@@ -1,17 +1,22 @@
 import { configureStore } from "@reduxjs/toolkit";
 import api, { API_STORE_KEY, reducer as apiReducer } from "./api";
 import booksReducer, { BOOKS_STORE_NS } from "./books.slice";
-import sessionReducer, { SESSION_STORE_NS } from "./session.slice";
+import sessionReducer, { SESSION_STORE_KEY } from "./session.slice";
+import apiCart, {
+  API_CART_STORE_KEY,
+  reducer as apiCartReducer,
+} from "./api-cart";
 
 const STORAGE_KEY = "book-store";
 export const store = configureStore({
   reducer: {
     [API_STORE_KEY]: apiReducer,
     [BOOKS_STORE_NS]: booksReducer,
-    [SESSION_STORE_NS]: sessionReducer,
+    [SESSION_STORE_KEY]: sessionReducer,
+    [API_CART_STORE_KEY]: apiCartReducer,
   },
   middleware: (getDefaultMiddleware) =>
-    getDefaultMiddleware().concat(api.middleware),
+    getDefaultMiddleware().concat(api.middleware).concat(apiCart.middleware),
 });
 
 store.subscribe(() => {
