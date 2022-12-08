@@ -43,6 +43,24 @@ const apiCart = createApi({
         url: "/cart",
       }),
     }),
+    postCart: builder.mutation({
+      query: () => ({
+        url: "/cart",
+        method: "POST",
+      }),
+    }),
+    postCartItem: builder.mutation({
+      query: () => ({
+        url: "/cart/book",
+        method: "POST",
+      }),
+    }),
+    deleteCartItem: builder.mutation({
+      query: (bookId: string) => ({
+        url: `/cart/book/${bookId}`,
+        method: "DELETE",
+      }),
+    }),
   }),
 });
 
