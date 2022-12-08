@@ -67,6 +67,6 @@ const apiCart = createApi({
   }),
 });
 
-export const { useGetCartQuery } = apiCart;
+export const { useLazyGetCartQuery } = apiCart;
 export const { reducer } = apiCart;
 export default apiCart;
