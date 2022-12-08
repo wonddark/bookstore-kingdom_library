@@ -10,9 +10,9 @@ const initialState: SessionState = {
   token: "",
   refreshToken: "",
 };
-export const SESSION_STORE_NS = "session";
+export const SESSION_STORE_KEY = "session";
 const sessionSlice = createSlice({
-  name: SESSION_STORE_NS,
+  name: SESSION_STORE_KEY,
   initialState,
   reducers: {
     login: (
