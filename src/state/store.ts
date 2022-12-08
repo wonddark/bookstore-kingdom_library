@@ -6,17 +6,29 @@ import apiCart, {
   API_CART_STORE_KEY,
   reducer as apiCartReducer,
 } from "./api-cart";
+import locationReducer, { LOCATION_STORE_KEY } from "./location.slice";
 
 const STORAGE_KEY = "book-store";
+const persistedState = (() => {
+  try {
+    const rawState = localStorage.getItem(STORAGE_KEY);
+    if (rawState) return JSON.parse(rawState);
+    return undefined;
+  } catch (e) {
+    return undefined;
+  }
+})();
 export const store = configureStore({
   reducer: {
     [API_STORE_KEY]: apiReducer,
     [BOOKS_STORE_NS]: booksReducer,
     [SESSION_STORE_KEY]: sessionReducer,
     [API_CART_STORE_KEY]: apiCartReducer,
+    [LOCATION_STORE_KEY]: locationReducer,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware().concat(api.middleware).concat(apiCart.middleware),
+  preloadedState: persistedState,
 });
 
 store.subscribe(() => {
