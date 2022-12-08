@@ -7,6 +7,9 @@ import Home from "./components/pages/Home";
 import BooksHome from "./components/widgets/BooksHome";
 import BookDetails from "./components/widgets/BookDetails";
 import Skeleton from "./components/layout/Skeleton";
+import UserCart from "./components/widgets/UserCart";
+import Authentication from "./components/widgets/Authentication";
+import LogoutControl from "./components/widgets/LogoutControl";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -32,6 +35,30 @@ const router = createBrowserRouter(
         element={
           <Skeleton>
             <BookDetails />
+          </Skeleton>
+        }
+      />
+      <Route
+        path="authenticate"
+        element={
+          <Skeleton>
+            <Authentication />
+          </Skeleton>
+        }
+      />
+      <Route
+        path="logout"
+        element={
+          <Skeleton>
+            <LogoutControl />
+          </Skeleton>
+        }
+      />
+      <Route
+        path="users/:userId/cart"
+        element={
+          <Skeleton>
+            <UserCart />
           </Skeleton>
         }
       />
