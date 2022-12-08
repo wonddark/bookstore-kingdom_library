@@ -2,6 +2,7 @@ import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { RootState } from "./store";
 
 type SessionState = {
+  authenticating: boolean;
   authenticated: boolean;
   token: string;
   refreshToken: string;
@@ -14,6 +15,7 @@ type SessionState = {
   email: string | undefined;
 };
 const initialState: SessionState = {
+  authenticating: false,
   authenticated: false,
   token: "",
   refreshToken: "",
@@ -58,6 +60,9 @@ const sessionSlice = createSlice({
       state.email = payload.email;
     },
     logout: () => initialState,
+    toggleAuthenticating: (state) => {
+      state.authenticating = !state.authenticating;
+    },
   },
 });
 
@@ -65,6 +70,8 @@ export const selectAuthenticated = (state: RootState) =>
   state[SESSION_STORE_KEY].authenticated;
 export const selectUserId = (state: RootState) =>
   state[SESSION_STORE_KEY].userId;
+export const selectAuthenticating = (state: RootState) =>
+  state[SESSION_STORE_KEY].authenticating;
 
-export const { login, logout } = sessionSlice.actions;
+export const { login, logout, toggleAuthenticating } = sessionSlice.actions;
 export default sessionSlice.reducer;
