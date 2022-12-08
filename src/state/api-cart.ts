@@ -13,6 +13,7 @@ export const API_CART_STORE_KEY = "api-cart";
 const baseQuery = fetchBaseQuery({
   baseUrl: "https://bookstore-api.gyfted.dev/api",
   mode: "cors",
+  cache: "no-store",
   prepareHeaders: (headers, { getState }) => {
     const token = (getState() as RootState)[SESSION_STORE_KEY].token;
     if (token) {
@@ -36,6 +37,8 @@ const baseQueryWithLogout: BaseQueryFn<
 };
 const apiCart = createApi({
   reducerPath: API_CART_STORE_KEY,
+  refetchOnReconnect: true,
+  refetchOnMountOrArgChange: true,
   baseQuery: baseQueryWithLogout,
   endpoints: (builder) => ({
     getCart: builder.query({
