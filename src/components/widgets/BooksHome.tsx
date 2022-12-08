@@ -2,7 +2,7 @@ import { useGetBooksQuery, useSearchBooksQuery } from "../../state/api";
 import BookItem from "./BookItem";
 import { Col, Container, Row } from "reactstrap";
 import SearchForm from "./SearchForm";
-import { useAppDispatch, useAppSelector } from "../../state/hooks";
+import { useAppSelector } from "../../state/hooks";
 import {
   selectPage,
   selectPaginate,
@@ -11,8 +11,6 @@ import {
 } from "../../state/books.slice";
 import { useEffect, useState } from "react";
 import Pagination from "./Pagination";
-import { changeLocation } from "../../state/location.slice";
-import { useLocation } from "react-router-dom";
 
 function BooksHome() {
   const [data, setData] = useState([]);
@@ -27,8 +25,6 @@ function BooksHome() {
   );
   const { data: searchResults, isLoading: loadingSearchResults } =
     useSearchBooksQuery({ query, page }, { skip: !searching });
-  const dispatch = useAppDispatch();
-  const { pathname } = useLocation();
   useEffect(() => {
     if (searching) {
       if (!loadingSearchResults) {
@@ -44,9 +40,6 @@ function BooksHome() {
     newBooks,
     searchResults,
   ]);
-  useEffect(() => {
-    dispatch(changeLocation(pathname));
-  }, [dispatch, pathname]);
   return (
     <Container className="py-2">
       <Row className="mt-4">
