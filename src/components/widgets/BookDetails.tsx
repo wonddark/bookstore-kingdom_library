@@ -1,10 +1,11 @@
 import { Col, Container, Placeholder, Row } from "reactstrap";
 import useBookDetails from "../../hooks/book-details.hook";
+import AddToCartBtn from "./AddToCartBtn";
 
 const he = require("he");
 
 function BookDetails() {
-  const { backToList, isLoading, data } = useBookDetails();
+  const { backToList, isLoading, data, isbn } = useBookDetails();
   return (
     <Container className="py-4">
       <button
@@ -19,9 +20,7 @@ function BookDetails() {
             <img src={data.image} alt="book-portrait" className="img-fluid" />
             <span className="d-block w-100 fs-5">ISBN: {data.isbn13}</span>
             <div className="mt-2">
-              <button className="btn btn-primary">
-                <i className="bi bi-cart-plus me-2" /> Poner en la cesta
-              </button>
+              <AddToCartBtn bookId={`${isbn}`} />
             </div>
           </Col>
           <Col>
