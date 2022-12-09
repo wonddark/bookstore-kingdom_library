@@ -19,7 +19,7 @@ function useBookDetails() {
   };
   useEffect(loadData, [isbn, getBookDetails]);
 
-  return { backToList, isLoading, data };
+  return { backToList, isLoading, data, isbn };
 }
 
 export default useBookDetails;
