@@ -1,26 +1,10 @@
 import { Col, Container, Placeholder, Row } from "reactstrap";
-import { useLazyGetBookDetailsQuery } from "../../state/api";
-import { useNavigate, useParams } from "react-router-dom";
-import { useEffect, useState } from "react";
+import useBookDetails from "../../hooks/book-details.hook";
 
 const he = require("he");
 
 function BookDetails() {
-  const { isbn } = useParams();
-  const [, setWrongPath] = useState(false);
-  const [getBookDetails, { isLoading, data }] = useLazyGetBookDetailsQuery();
-  const navigate = useNavigate();
-  const backToList = () => {
-    navigate("/books");
-  };
-  const loadData = () => {
-    if (isbn) {
-      getBookDetails(isbn);
-    } else {
-      setWrongPath(true);
-    }
-  };
-  useEffect(loadData, [isbn]);
+  const { backToList, isLoading, data } = useBookDetails();
   return (
     <Container className="py-4">
       <button
