@@ -72,6 +72,8 @@ export const selectUserId = (state: RootState) =>
   state[SESSION_STORE_KEY].userId;
 export const selectAuthenticating = (state: RootState) =>
   state[SESSION_STORE_KEY].authenticating;
+export const selectUserEmail = (state: RootState) =>
+  state[SESSION_STORE_KEY].email;
 
 export const { login, logout, toggleAuthenticating } = sessionSlice.actions;
 export default sessionSlice.reducer;
