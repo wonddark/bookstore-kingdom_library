@@ -1,11 +1,15 @@
 import { Col, Container, Placeholder, Row } from "reactstrap";
 import useBookDetails from "../../hooks/book-details.hook";
 import AddToCartBtn from "./AddToCartBtn";
+import { useAppSelector } from "../../state/hooks";
+import { selectAuthenticated } from "../../state/session.slice";
 
 const he = require("he");
 
 function BookDetails() {
-  const { backToList, isLoading, data, isbn } = useBookDetails();
+  const { backToList, isLoading, data } = useBookDetails();
+  const state = useAppSelector((state) => state);
+  const isAuthenticated = selectAuthenticated(state);
   return (
     <Container className="py-4">
       <button
@@ -19,9 +23,11 @@ function BookDetails() {
           <Col xs={12} md={3} className="text-center mb-4">
             <img src={data.image} alt="book-portrait" className="img-fluid" />
             <span className="d-block w-100 fs-5">ISBN: {data.isbn13}</span>
-            <div className="mt-2">
-              <AddToCartBtn bookId={`${isbn}`} />
-            </div>
+            {isAuthenticated ? (
+              <div className="mt-2">
+                <AddToCartBtn book={data} />
+              </div>
+            ) : null}
           </Col>
           <Col>
             <h1>{he.decode(data.title)}</h1>
