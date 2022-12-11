@@ -29,7 +29,11 @@ const baseQueryWithLogout: BaseQueryFn<
   FetchBaseQueryError
 > = async (args, api, extraOptions) => {
   let result = await baseQuery(args, api, extraOptions);
-  if (result.error && result.error.status === 401) {
+  if (
+    result.error &&
+    // @ts-ignore
+    (result.error.status === 401 || result.error.originalStatus === 403)
+  ) {
     api.dispatch(logout());
     return Promise.reject("Unauthorized");
   }
@@ -39,34 +43,52 @@ const apiCart = createApi({
   reducerPath: API_CART_STORE_KEY,
   refetchOnReconnect: true,
   refetchOnMountOrArgChange: true,
+  tagTypes: ["CART"],
   baseQuery: baseQueryWithLogout,
   endpoints: (builder) => ({
     getCart: builder.query({
       query: () => ({
         url: "/cart",
       }),
+      providesTags: ["CART"],
     }),
     postCart: builder.mutation({
       query: () => ({
         url: "/cart",
         method: "POST",
       }),
+      invalidatesTags: ["CART"],
     }),
     postCartItem: builder.mutation({
-      query: () => ({
+      query: (args: {
+        product: string;
+        title: string;
+        price: number;
+        qty: number;
+        subtitle?: string;
+        image?: string;
+      }) => ({
         url: "/cart/book",
         method: "POST",
+        body: args,
       }),
+      invalidatesTags: ["CART"],
     }),
     deleteCartItem: builder.mutation({
       query: (bookId: string) => ({
         url: `/cart/book/${bookId}`,
         method: "DELETE",
       }),
+      invalidatesTags: ["CART"],
     }),
   }),
 });
 
-export const { useLazyGetCartQuery } = apiCart;
+export const {
+  useLazyGetCartQuery,
+  usePostCartItemMutation,
+  useDeleteCartItemMutation,
+  usePostCartMutation,
+} = apiCart;
 export const { reducer } = apiCart;
 export default apiCart;
