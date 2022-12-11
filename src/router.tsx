@@ -10,6 +10,7 @@ import Skeleton from "./components/layout/Skeleton";
 import UserCart from "./components/widgets/UserCart";
 import Authentication from "./components/widgets/Authentication";
 import LogoutControl from "./components/widgets/LogoutControl";
+import Checkout from "./components/widgets/Checkout";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -59,6 +60,14 @@ const router = createBrowserRouter(
         element={
           <Skeleton>
             <UserCart />
+          </Skeleton>
+        }
+      />
+      <Route
+        path="checkout/:userId"
+        element={
+          <Skeleton>
+            <Checkout />
           </Skeleton>
         }
       />
