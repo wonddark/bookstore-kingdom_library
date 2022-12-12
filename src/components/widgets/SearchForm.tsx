@@ -1,19 +1,12 @@
 import { Button, Form, Input, InputGroup } from "reactstrap";
 import { useLazySearchBooksQuery } from "../../state/api";
 import { ChangeEvent, FormEvent, useState } from "react";
-import { useAppDispatch, useAppSelector } from "../../state/hooks";
-import {
-  selectQuery,
-  setQuery as setQueryState,
-} from "../../state/books.slice";
-import { useLocation, useNavigate } from "react-router-dom";
+import { useLocation, useNavigate, useSearchParams } from "react-router-dom";
 
 function SearchForm() {
-  const state = useAppSelector((state) => state);
-  const queryState = selectQuery(state);
-  const [query, setQuery] = useState(queryState);
-  const [page] = useState(1);
-  const dispatch = useAppDispatch();
+  const [readSearchParams, writeSearchParams] = useSearchParams();
+  const [query, setQuery] = useState(readSearchParams.get("query") || "");
+  const [page] = useState(Number(readSearchParams.get("page")) || 1);
   const [searchBooks, { isLoading }] = useLazySearchBooksQuery();
   const navigate = useNavigate();
   const { pathname } = useLocation();
@@ -24,10 +17,11 @@ function SearchForm() {
   };
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    dispatch(setQueryState(query));
     searchBooks({ query, page });
     if (pathname === "/") {
-      navigate("/books");
+      navigate({ pathname: "/books", search: `query=${query}&page=${page}` });
+    } else {
+      writeSearchParams({ query, page: `${page}` });
     }
   };
   return (
@@ -44,6 +38,7 @@ function SearchForm() {
           type="submit"
           color="success"
           className="input-group-text search-form-btn"
+          disabled={isLoading}
         >
           <i className="bi bi-search text-light" />
         </Button>
