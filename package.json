@@ -36,7 +36,10 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "compile-sass": "sass src/themes/main.scss src/themes/main.css",
+    "minify-css": "postcss src/themes/main.css > public/themes/main.css; mv src/themes/main.css.map public/themes/; rm src/themes/main.css",
+    "update-theme": "npm run compile-sass && npm run minify-css"
   },
   "eslintConfig": {
     "extends": [
