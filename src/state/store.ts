@@ -15,6 +15,7 @@ const persistedState = (() => {
       const parsed = JSON.parse(rawState);
       delete parsed[API_STORE_KEY];
       delete parsed[API_CART_STORE_KEY];
+      delete parsed[BOOKS_STORE_NS];
       return parsed;
     }
     return undefined;
