@@ -5,18 +5,22 @@ import {
   PaginationLink,
   Row,
 } from "reactstrap";
-import { selectPage, setPage } from "../../state/books.slice";
-import { useAppDispatch, useAppSelector } from "../../state/hooks";
+import { useSearchParams } from "react-router-dom";
 
 function Pagination() {
-  const dispatch = useAppDispatch();
-  const state = useAppSelector((state) => state);
-  const page = selectPage(state);
+  const [readSearchParams, writeSearchParams] = useSearchParams();
+  const query = readSearchParams.get("query") || "";
+  const page = Number(readSearchParams.get("page")) || 1;
   const previousPage = () => {
-    dispatch(setPage(page > 1 ? page - 1 : 1));
+    writeSearchParams(() => {
+      if (page > 1) {
+        return { query, page: `${page - 1}` };
+      }
+      return { query, page: "1" };
+    });
   };
   const nextPage = () => {
-    dispatch(setPage(page + 1));
+    writeSearchParams({ query, page: `${page + 1}` });
   };
   return (
     <Row className="mt-2">
