@@ -97,3 +97,5 @@ $theme-colors: map-merge($theme-colors, $custom-colors);
 .books-list.paginated {
   height: calc(100vh - 238px);
 }
+
+@import "../../node_modules/react-toastify/scss/main";
