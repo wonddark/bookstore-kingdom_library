@@ -1,63 +1,54 @@
 import { useGetBooksQuery, useSearchBooksQuery } from "../../state/api";
 import BookItem from "./BookItem";
-import { Col, Container, Row } from "reactstrap";
 import SearchForm from "./SearchForm";
-import { useAppSelector } from "../../state/hooks";
-import {
-  selectPage,
-  selectPaginate,
-  selectQuery,
-  selectSearching,
-} from "../../state/books.slice";
 import { useEffect, useState } from "react";
 import Pagination from "./Pagination";
+import { useSearchParams } from "react-router-dom";
 
 function BooksHome() {
   const [data, setData] = useState([]);
-  const state = useAppSelector((state) => state);
-  const searching = selectSearching(state);
-  const page = selectPage(state);
-  const query = selectQuery(state);
-  const paginate = selectPaginate(state);
+  const [shouldPaginate, setShouldPaginate] = useState(false);
+  const [readSearchParams] = useSearchParams();
+  const query = readSearchParams.get("query") || "";
+  const page = Number(readSearchParams.get("page")) || 1;
   const { data: newBooks, isLoading: loadingNewBooks } = useGetBooksQuery(
     {},
-    { skip: searching }
+    { skip: Boolean(query) }
   );
   const { data: searchResults, isLoading: loadingSearchResults } =
-    useSearchBooksQuery({ query, page }, { skip: !searching });
-  useEffect(() => {
-    if (searching) {
-      if (!loadingSearchResults) {
-        searchResults && setData(searchResults.books);
+    useSearchBooksQuery({ query, page }, { skip: query === null });
+  const loadData = () => {
+    if (query) {
+      if (!loadingSearchResults && searchResults) {
+        setData(searchResults.books);
+        setShouldPaginate(searchResults.total > searchResults.books.length - 1);
       }
     } else if (!loadingNewBooks) {
       newBooks && setData(newBooks.books);
     }
-  }, [
-    searching,
+  };
+  useEffect(loadData, [
     loadingNewBooks,
     loadingSearchResults,
     newBooks,
     searchResults,
+    query,
   ]);
   return (
-    <Container className="py-2">
-      <Row className="mt-4">
-        <Col xs={12} md={9} xl={7} className="mx-auto">
+    <div className="container py-2">
+      <div className="row mt-4">
+        <div className="col-12 col-md-9 col-xl-7 mx-auto">
           <SearchForm />
-        </Col>
-      </Row>
-      {paginate && <Pagination />}
-      <Row
-        xs={1}
-        md={2}
-        lg={3}
-        xl={4}
-        xxl={5}
-        className={`books-list${paginate ? " paginated" : ""}`}
+        </div>
+      </div>
+      {shouldPaginate && <Pagination />}
+      <div
+        className={`row row-cols-1 row-cols-md-2 row-cols-lg-3 row-cols-xl-4 row-cols-xxl-5 books-list${
+          shouldPaginate ? " paginated" : ""
+        }`}
       >
         {data.map((item: any) => (
-          <Col key={item.isbn13}>
+          <div className="col" key={item.isbn13}>
             <BookItem
               title={item.title}
               subtitle={item.subtitle}
@@ -65,10 +56,10 @@ function BooksHome() {
               price={item.price}
               image={item.image}
             />
-          </Col>
+          </div>
         ))}
-      </Row>
-    </Container>
+      </div>
+    </div>
   );
 }
 
