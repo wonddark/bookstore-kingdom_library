@@ -1,5 +1,6 @@
 @import "../../node_modules/bootstrap/scss/functions";
 
+$white:    #fff;
 $purple: #6f42c1;
 $teal: #20c997;
 
@@ -32,6 +33,8 @@ $hero-light: $purple-300;
 
 $body-bg: $purple-50;
 $body-color: $purple-900;
+
+$input-bg: $white;
 
 @import "../../node_modules/bootstrap/scss/variables";
 
