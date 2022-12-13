@@ -5,9 +5,12 @@ import { store } from "./state/store";
 import reportWebVitals from "./reportWebVitals";
 import { RouterProvider } from "react-router-dom";
 import router from "./router";
+import { initKeycloak } from "./services/keycloak.service";
 
 const container = document.getElementById("root")!;
 const root = createRoot(container);
+
+initKeycloak();
 
 root.render(
   <React.StrictMode>

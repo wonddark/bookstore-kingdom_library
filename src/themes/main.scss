@@ -1,5 +1,6 @@
 @import "../../node_modules/bootstrap/scss/functions";
 
+$white:    #fff;
 $purple: #6f42c1;
 $teal: #20c997;
 
@@ -33,6 +34,8 @@ $hero-light: $purple-300;
 $body-bg: $purple-50;
 $body-color: $purple-900;
 
+$input-bg: $white;
+
 @import "../../node_modules/bootstrap/scss/variables";
 
 $custom-colors: (
@@ -56,7 +59,9 @@ $theme-colors: map-merge($theme-colors, $custom-colors);
 @import "../../node_modules/bootstrap/scss/pagination";
 @import "../../node_modules/bootstrap/scss/containers";
 @import "../../node_modules/bootstrap/scss/images";
+@import "../../node_modules/bootstrap/scss/badge";
 @import "../../node_modules/bootstrap/scss/bootstrap-utilities";
+@import "../../node_modules/bootstrap/scss/transitions";
 
 .home-hero-container {
   min-height: calc(100vh - 56px);
@@ -93,3 +98,5 @@ $theme-colors: map-merge($theme-colors, $custom-colors);
 .books-list.paginated {
   height: calc(100vh - 238px);
 }
+
+@import "../../node_modules/react-toastify/scss/main";

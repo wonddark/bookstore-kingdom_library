@@ -1,39 +1,24 @@
-import { ReactElement, useState } from "react";
-import {
-  Collapse,
-  Container,
-  Nav,
-  Navbar,
-  NavbarBrand,
-  NavbarToggler,
-  NavItem,
-  NavLink,
-} from "reactstrap";
+import { ReactElement } from "react";
+import Navbar from "./Navbar";
+import { ToastContainer } from "react-toastify";
 
 function Skeleton({ children }: { children: ReactElement }) {
-  const [isOpen, setIsOpen] = useState(false);
-  const toggleIsOpen = () => {
-    setIsOpen((prevState) => !prevState);
-  };
   return (
-    <Container fluid className="p-0">
-      <header className="sticky-top">
-        <Navbar expand="md" dark color="navbar-dark" container="xl">
-          <NavbarBrand href="/">Kingdom Library</NavbarBrand>
-          <NavbarToggler onClick={toggleIsOpen} />
-          <Collapse isOpen={isOpen} navbar>
-            <Nav navbar className="mt-3 mt-md-0 ms-auto">
-              <NavItem>
-                <NavLink href="/books" className="link-success">
-                  Latest
-                </NavLink>
-              </NavItem>
-            </Nav>
-          </Collapse>
-        </Navbar>
-      </header>
+    <div className="container-fluid p-0">
+      <Navbar />
       <>{children}</>
-    </Container>
+      <ToastContainer
+        newestOnTop={true}
+        draggable={false}
+        position="bottom-center"
+        autoClose={2500}
+        hideProgressBar={false}
+        closeOnClick
+        pauseOnFocusLoss={false}
+        pauseOnHover
+        theme="colored"
+      />
+    </div>
   );
 }
 

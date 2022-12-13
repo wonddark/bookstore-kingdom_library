@@ -5,7 +5,11 @@ const api = createApi({
   reducerPath: API_STORE_KEY,
   baseQuery: fetchBaseQuery({
     baseUrl: "https://api.itbook.store/1.0/",
+    cache: "no-store",
+    mode: "cors",
   }),
+  refetchOnMountOrArgChange: true,
+  refetchOnReconnect: true,
   endpoints: (builder) => ({
     getBooks: builder.query({
       query: () => ({
