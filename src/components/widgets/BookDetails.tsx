@@ -45,7 +45,7 @@ function BookDetails() {
             </h4>
             <h2 className="fs-5 mb-4">{data.authors}</h2>
             <p className="lead">{he.decode(data.desc)}</p>
-            {isAuthenticated ? (
+            {isAuthenticated && Number(data.price.replace("$", "")) > 0 ? (
               <div className="mt-2">
                 <AddToCartBtn book={data} />
               </div>
