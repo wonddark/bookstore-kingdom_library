@@ -5,31 +5,21 @@ import {
   useStripe,
 } from "@stripe/react-stripe-js";
 import { loadStripe } from "@stripe/stripe-js";
-import { FormEvent, useEffect, useState } from "react";
+import { FormEvent, useState } from "react";
 import { useAppSelector } from "../../state/hooks";
-import { selectUserEmail, selectUserId } from "../../state/session.slice";
-import { useLazyGetCartQuery } from "../../state/api-cart";
-import { Link, useParams } from "react-router-dom";
+import { selectUserEmail } from "../../state/session.slice";
+import { useGetCartQuery } from "../../state/api-cart";
+import { Link } from "react-router-dom";
 import { usePostCartMutation } from "../../state/api-cart";
 import { toast } from "react-toastify";
 
 const CheckoutForm = () => {
-  const { userId } = useParams();
   const stripe = useStripe();
   const elements = useElements();
   const state = useAppSelector((state) => state);
   const userEmail = selectUserEmail(state);
-  const storedUserId = selectUserId(state);
-  const [getCart, { data, isLoading }] = useLazyGetCartQuery({});
+  const { data, isLoading } = useGetCartQuery({});
   let total = 0;
-
-  const accessGranted = userId === storedUserId;
-
-  useEffect(() => {
-    if (accessGranted) {
-      getCart({});
-    }
-  }, [accessGranted, getCart]);
 
   const metadata = {};
   data &&
