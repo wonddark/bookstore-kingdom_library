@@ -59,6 +59,7 @@ $theme-colors: map-merge($theme-colors, $custom-colors);
 @import "../../node_modules/bootstrap/scss/pagination";
 @import "../../node_modules/bootstrap/scss/containers";
 @import "../../node_modules/bootstrap/scss/images";
+@import "../../node_modules/bootstrap/scss/badge";
 @import "../../node_modules/bootstrap/scss/bootstrap-utilities";
 @import "../../node_modules/bootstrap/scss/transitions";
 
