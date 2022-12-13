@@ -1,5 +1,6 @@
 import { usePostCartItemMutation } from "../state/api-cart";
 import { ChangeEvent, useState } from "react";
+import { toast } from "react-toastify";
 
 function useAddToCart({
   book,
@@ -16,15 +17,22 @@ function useAddToCart({
   const [postCartItem, { isLoading, isError }] = usePostCartItemMutation();
 
   const submit = () => {
-    postCartItem({
-      product: book.isbn13,
-      title: book.title,
-      subtitle: book.subtitle,
-      price: Number(book.price.replace("$", "")),
-      image: book.image,
-      qty: quantity,
-    })
-      .unwrap()
+    toast
+      .promise(
+        postCartItem({
+          product: book.isbn13,
+          title: book.title,
+          subtitle: book.subtitle,
+          price: Number(book.price.replace("$", "")),
+          image: book.image,
+          qty: quantity,
+        }).unwrap(),
+        {
+          pending: "Processing request",
+          success: "Done",
+          error: "We couldn't process the request",
+        }
+      )
       .then(() => setQuantity(0));
   };
 
