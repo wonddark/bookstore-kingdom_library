@@ -11,6 +11,7 @@ import { selectUserEmail, selectUserId } from "../../state/session.slice";
 import { useLazyGetCartQuery } from "../../state/api-cart";
 import { Link, useParams } from "react-router-dom";
 import { usePostCartMutation } from "../../state/api-cart";
+import { toast } from "react-toastify";
 
 const CheckoutForm = () => {
   const { userId } = useParams();
@@ -60,15 +61,22 @@ const CheckoutForm = () => {
     const card = elements?.getElement(CardElement);
 
     if (card) {
-      stripe
-        .createPaymentMethod({
-          type: "card",
-          card,
-          billing_details: {
-            email: userEmail,
-          },
-          metadata,
-        })
+      toast
+        .promise(
+          stripe.createPaymentMethod({
+            type: "card",
+            card,
+            billing_details: {
+              email: userEmail,
+            },
+            metadata,
+          }),
+          {
+            pending: "Payment processing",
+            success: "Payment successful",
+            error: "We couldn't process your payment",
+          }
+        )
         .then((res) => {
           setPaymentId(`${res.paymentMethod?.id}`);
           thanksPayment();
@@ -128,11 +136,13 @@ const CheckoutForm = () => {
                   options={{
                     style: {
                       base: {
-                        fontSize: "16px",
+                        fontSize: "18px",
+                        fontWeight: 400,
                         color: "#424770",
                         "::placeholder": {
                           color: "#aab7c4",
                         },
+                        backgroundColor: "#fff",
                       },
                       invalid: {
                         color: "#9e2146",
@@ -150,7 +160,7 @@ const CheckoutForm = () => {
             <button
               type="submit"
               disabled={!stripe}
-              className="btn btn-success"
+              className="btn btn-primary"
             >
               <i className="bi bi-check me-2" /> Aceptar
             </button>
