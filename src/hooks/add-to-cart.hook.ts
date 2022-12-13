@@ -22,9 +22,9 @@ function useAddToCart({
         postCartItem({
           product: book.isbn13,
           title: book.title,
-          subtitle: book.subtitle,
+          subtitle: book.subtitle ? book.subtitle : undefined,
           price: Number(book.price.replace("$", "")),
-          image: book.image,
+          image: book.image ? book.image : undefined,
           qty: quantity,
         }).unwrap(),
         {
