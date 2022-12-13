@@ -86,7 +86,6 @@ const apiCart = createApi({
 
 export const {
   useGetCartQuery,
-  useLazyGetCartQuery,
   usePostCartItemMutation,
   useDeleteCartItemMutation,
   usePostCartMutation,
