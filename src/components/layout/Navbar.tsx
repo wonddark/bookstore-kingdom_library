@@ -1,11 +1,13 @@
 import { Link } from "react-router-dom";
 import { useAppSelector } from "../../state/hooks";
 import { selectAuthenticated, selectUserId } from "../../state/session.slice";
+import { useGetCartQuery } from "../../state/api-cart";
 
 function Navbar() {
   const state = useAppSelector((state) => state);
   const authenticated = selectAuthenticated(state);
   const userId = selectUserId(state);
+  const { data } = useGetCartQuery({});
   return (
     <header className="sticky-top">
       <div className="navbar navbar-expand-md navbar-dark bg-navbar-dark">
@@ -25,7 +27,7 @@ function Navbar() {
             <span className="navbar-toggler-icon"></span>
           </button>
           <div className="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul className="navbar-nav mt-3 mt-md-0 ms-auto">
+            <ul className="navbar-nav mt-3 mt-md-0 ms-auto align-items-center">
               <li className="nav-item">
                 <a href="/books" className="nav-link link-success">
                   Latest
@@ -35,9 +37,18 @@ function Navbar() {
                 <li className="nav-item">
                   <a
                     href={`/users/${userId}/cart`}
-                    className="nav-link link-success"
+                    className="btn btn-success btn-sm"
                   >
-                    Cart
+                    <i
+                      className={`bi bi-cart${
+                        data && data.products.length > 0 ? "-fill" : ""
+                      } me-2`}
+                    />
+                    {data ? (
+                      <span className="badge text-bg-primary">
+                        {data.products.length}
+                      </span>
+                    ) : null}
                   </a>
                 </li>
               ) : null}
