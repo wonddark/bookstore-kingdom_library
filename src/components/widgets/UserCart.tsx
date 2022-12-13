@@ -49,9 +49,15 @@ function UserCart() {
                     <div className="container">
                       <div className="row fw-bold">
                         <div className="col">Imagen</div>
-                        <div className="col col-6">Título / Subtítulo</div>
-                        <div className="col text-end">Precio</div>
-                        <div className="col text-end">Cantidad</div>
+                        <div className="col col-6 d-none d-md-block">
+                          Título / Subtítulo
+                        </div>
+                        <div className="col text-end d-none d-md-block">
+                          Precio
+                        </div>
+                        <div className="col text-end d-none d-lg-block">
+                          Cantidad
+                        </div>
                         <div className="col text-end">Subtotal</div>
                         <div className="col"></div>
                       </div>
@@ -71,7 +77,7 @@ function UserCart() {
                                 alt="product thumbnail"
                               />
                             </div>
-                            <div className="col col-6">
+                            <div className="col col-6 d-none d-md-block">
                               <p className="fs-5 display-1 mb-1">
                                 {item.title}
                               </p>
@@ -79,10 +85,12 @@ function UserCart() {
                                 {item.subtitle}
                               </small>
                             </div>
-                            <div className="col text-end">
+                            <div className="col text-end d-none d-md-block">
                               ${Number(item.price).toLocaleString("es-ES")}
                             </div>
-                            <div className="col text-end">{item.qty}</div>
+                            <div className="col text-end d-none d-lg-block">
+                              {item.qty}
+                            </div>
                             <div className="col text-end">
                               ${subtotal.toLocaleString("es-ES")}
                             </div>
@@ -97,7 +105,7 @@ function UserCart() {
                   <div className="card card-body mb-2">
                     <div className="container">
                       <div className="row fw-bold">
-                        <div className="col-10">Total</div>
+                        <div className="col-8 col-md-10">Total</div>
                         <div className="col">
                           ${total.toLocaleString("es-ES")}
                         </div>
