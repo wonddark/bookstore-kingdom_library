@@ -1,6 +1,6 @@
 function BookItemPlaceholder() {
   return (
-    <div className="card card-body shadow h-100">
+    <div className="card card-body shadow">
       <div className="container">
         <div className="row placeholder-glow">
           <div
