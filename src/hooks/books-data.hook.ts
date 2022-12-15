@@ -4,7 +4,11 @@ import { useGetBooksQuery, useSearchBooksQuery } from "../state/api";
 
 function useBookData() {
   const [data, setData] = useState([]);
-  const [shouldPaginate, setShouldPaginate] = useState(false);
+  const [shouldPaginate, setShouldPaginate] = useState({
+    state: false,
+    canGoBackward: false,
+    canGoForward: false,
+  });
   const [readSearchParams] = useSearchParams();
   const query = readSearchParams.get("query") || "";
   const page = Number(readSearchParams.get("page")) || 1;
@@ -18,7 +22,15 @@ function useBookData() {
     if (query) {
       if (!loadingSearchResults && searchResults) {
         setData(searchResults.books);
-        setShouldPaginate(searchResults.total > searchResults.books.length - 1);
+        const canGoBackward = Number(searchResults.page) > 1;
+        const canGoForward =
+          searchResults.total >
+          (Number(searchResults.page) - 1) * 10 + searchResults.books.length;
+        setShouldPaginate({
+          state: canGoBackward || canGoForward,
+          canGoBackward,
+          canGoForward,
+        });
       }
     } else if (!loadingNewBooks) {
       newBooks && setData(newBooks.books);
