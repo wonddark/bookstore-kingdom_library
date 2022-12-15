@@ -8,6 +8,7 @@ function RemoveFromCartBtn({ bookId }: Props) {
       className="btn btn-outline-danger btn-sm"
       disabled={isLoading}
       onClick={submit}
+      title="Eliminar producto de la cesta"
     >
       <i className="bi bi-trash" />
     </button>
