@@ -1,6 +1,7 @@
 import useAddToCart from "../../hooks/add-to-cart.hook";
 
-function AddToCartBtn({ book }: { book: any }) {
+type Props = { book: any };
+function AddToCartBtn({ book }: Props) {
   const { submit, riseQuantity, lowQuantity, updateQuantity, quantity } =
     useAddToCart({
       book,

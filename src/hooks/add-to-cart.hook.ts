@@ -2,9 +2,7 @@ import { usePostCartItemMutation } from "../state/api-cart";
 import { ChangeEvent, useState } from "react";
 import { toast } from "react-toastify";
 
-function useAddToCart({
-  book,
-}: {
+type Inputs = {
   book: {
     isbn13: string;
     title: string;
@@ -12,7 +10,8 @@ function useAddToCart({
     price: string;
     image: string;
   };
-}) {
+};
+function useAddToCart({ book }: Inputs) {
   const [quantity, setQuantity] = useState(1);
   const [postCartItem, { isLoading, isError }] = usePostCartItemMutation();
 

@@ -1,7 +1,8 @@
 import { useDeleteCartItemMutation } from "../state/api-cart";
 import { toast } from "react-toastify";
 
-function useRemoveFromCart({ product }: { product: string }) {
+type Inputs = { product: string };
+function useRemoveFromCart({ product }: Inputs) {
   const [removeFromCart, { isLoading, isError }] = useDeleteCartItemMutation();
 
   const submit = () => {

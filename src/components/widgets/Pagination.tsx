@@ -7,7 +7,8 @@ import {
 } from "reactstrap";
 import { useSearchParams } from "react-router-dom";
 
-function Pagination() {
+type Props = { enableBack: boolean; enableForward: boolean };
+function Pagination({ enableBack, enableForward }: Props) {
   const [readSearchParams, writeSearchParams] = useSearchParams();
   const query = readSearchParams.get("query") || "";
   const page = Number(readSearchParams.get("page")) || 1;
@@ -26,13 +27,13 @@ function Pagination() {
     <Row className="mt-2">
       <Col>
         <BsPagination listClassName="right-pagination">
-          <PaginationItem disabled={page === 1}>
+          <PaginationItem disabled={!enableBack}>
             <PaginationLink previous onClick={previousPage}>
               <i className="bi bi-chevron-double-left me-2" />
               Previous
             </PaginationLink>
           </PaginationItem>
-          <PaginationItem>
+          <PaginationItem disabled={!enableForward}>
             <PaginationLink next onClick={nextPage}>
               Next
               <i className="bi bi-chevron-double-right ms-2" />

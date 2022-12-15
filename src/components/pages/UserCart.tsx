@@ -1,6 +1,8 @@
 import { useGetCartQuery } from "../../state/api-cart";
-import RemoveFromCartBtn from "./RemoveFromCartBtn";
-import PayCartBtn from "./PayCartBtn";
+import RemoveFromCartBtn from "../widgets/RemoveFromCartBtn";
+import PayCartBtn from "../widgets/PayCartBtn";
+import EmptyCartBtn from "../widgets/EmptyCartBtn";
+import EditItemInCartBtn from "../widgets/EditItemInCartBtn";
 
 function UserCart() {
   const { data, isLoading } = useGetCartQuery({});
@@ -73,6 +75,15 @@ function UserCart() {
                           ${subtotal.toLocaleString("es-ES")}
                         </div>
                         <div className="col text-center">
+                          <EditItemInCartBtn
+                            bookId={item.product}
+                            price={Number(item.price.replace("$", ""))}
+                            title={item.title}
+                            image={item.image}
+                            subtitle={item.subtitle}
+                            currentQuantity={item.qty}
+                          />
+                          <div className="me-1 d-inline-block" />
                           <RemoveFromCartBtn bookId={item.product} />
                         </div>
                       </div>
@@ -89,6 +100,8 @@ function UserCart() {
                 </div>
               </div>
               <div className="my-3 text-end">
+                <EmptyCartBtn />
+                <div className="me-2 d-inline-block" />
                 <PayCartBtn />
               </div>
             </div>

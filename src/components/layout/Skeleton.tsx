@@ -2,7 +2,8 @@ import { ReactElement } from "react";
 import Navbar from "./Navbar";
 import { ToastContainer } from "react-toastify";
 
-function Skeleton({ children }: { children: ReactElement }) {
+type Props = { children: ReactElement };
+function Skeleton({ children }: Props) {
   return (
     <div className="container-fluid p-0">
       <Navbar />
