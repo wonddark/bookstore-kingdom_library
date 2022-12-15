@@ -32,7 +32,11 @@ function useBookData() {
     query,
   ]);
 
-  return { data, shouldPaginate };
+  return {
+    data,
+    shouldPaginate,
+    isLoading: loadingNewBooks || loadingSearchResults,
+  };
 }
 
 export default useBookData;
