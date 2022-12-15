@@ -27,7 +27,7 @@ function BookDetails() {
             </div>
             <div className="col">
               <h1 className="mb-0 display-1 fs-2">{he.decode(data.title)}</h1>
-              <div className="mb-2">
+              <div className="mb-4">
                 <small className="fw-bolder bg-primary text-light py-1 px-3 mb-2">
                   {data.price}
                 </small>
@@ -39,12 +39,27 @@ function BookDetails() {
                   <i className="bi bi-calendar-event me-1" />
                   {data.year}
                 </small>
+                <small className="ms-3 text-muted">
+                  <i className="bi bi-book me-1" />
+                  {data.pages}
+                </small>
               </div>
-              <h4 className="display-1 fs-5 fst-italic">
+              <h4 className="display-1 fs-5 fst-italic mb-4">
                 {he.decode(data.subtitle)}
               </h4>
-              <h2 className="fs-5 mb-4">{data.authors}</h2>
               <p className="lead">{he.decode(data.desc)}</p>
+              <h2 className="fs-5 mb-4">{data.authors}</h2>
+              {data.pdf?.["Free eBook"] ? (
+                <a
+                  href={data.pdf["Free eBook"]}
+                  className="mt-2 text-decoration-none"
+                  target="_blank"
+                  rel="noreferrer"
+                >
+                  Download FREE pdf{" "}
+                  <i className="ms-2 bi bi-box-arrow-up-right" />
+                </a>
+              ) : null}
               {isAuthenticated && Number(data.price.replace("$", "")) > 0 ? (
                 <div className="mt-2">
                   <AddToCartBtn book={data} />
