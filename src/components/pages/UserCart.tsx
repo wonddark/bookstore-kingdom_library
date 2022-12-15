@@ -1,6 +1,7 @@
 import { useGetCartQuery } from "../../state/api-cart";
 import RemoveFromCartBtn from "../widgets/RemoveFromCartBtn";
 import PayCartBtn from "../widgets/PayCartBtn";
+import EmptyCartBtn from "../widgets/EmptyCartBtn";
 
 function UserCart() {
   const { data, isLoading } = useGetCartQuery({});
@@ -89,6 +90,8 @@ function UserCart() {
                 </div>
               </div>
               <div className="my-3 text-end">
+                <EmptyCartBtn />
+                <div className="me-2 d-inline-block" />
                 <PayCartBtn />
               </div>
             </div>
