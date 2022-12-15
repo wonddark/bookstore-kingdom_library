@@ -2,6 +2,7 @@ import { useGetCartQuery } from "../../state/api-cart";
 import RemoveFromCartBtn from "../widgets/RemoveFromCartBtn";
 import PayCartBtn from "../widgets/PayCartBtn";
 import EmptyCartBtn from "../widgets/EmptyCartBtn";
+import EditItemInCartBtn from "../widgets/EditItemInCartBtn";
 
 function UserCart() {
   const { data, isLoading } = useGetCartQuery({});
@@ -75,6 +76,15 @@ function UserCart() {
                         </div>
                         <div className="col text-center">
                           <RemoveFromCartBtn bookId={item.product} />
+                          <div className="me-1 d-inline-block" />
+                          <EditItemInCartBtn
+                            bookId={item.product}
+                            price={Number(item.price.replace("$", ""))}
+                            title={item.title}
+                            image={item.image}
+                            subtitle={item.subtitle}
+                            currentQuantity={item.qty}
+                          />
                         </div>
                       </div>
                     </div>
