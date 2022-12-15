@@ -1,6 +1,7 @@
 import useRemoveFromCart from "../../hooks/remove-from-cart.hook";
 
-function RemoveFromCartBtn({ bookId }: { bookId: string }) {
+type Props = { bookId: string };
+function RemoveFromCartBtn({ bookId }: Props) {
   const { submit, isLoading } = useRemoveFromCart({ product: bookId });
   return (
     <button

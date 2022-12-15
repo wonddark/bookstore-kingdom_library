@@ -1,18 +1,13 @@
 import { useNavigate } from "react-router-dom";
 
-function BookItem({
-  title,
-  subtitle,
-  isbn,
-  price,
-  image,
-}: {
+type Props = {
   title: string;
   subtitle: string;
   isbn: string;
   price: string;
   image: string;
-}) {
+};
+function BookItem({ title, subtitle, isbn, price, image }: Props) {
   const navigate = useNavigate();
   const viewBookDetails = () => {
     navigate(`/books/${isbn}`);
