@@ -63,6 +63,7 @@ $theme-colors: map-merge($theme-colors, $custom-colors);
 @import "../../node_modules/bootstrap/scss/bootstrap-utilities";
 @import "../../node_modules/bootstrap/scss/transitions";
 @import "../../node_modules/bootstrap/scss/placeholders";
+@import "../../node_modules/bootstrap/scss/modal";
 
 .home-hero-container {
   min-height: calc(100vh - 56px);
