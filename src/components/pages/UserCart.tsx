@@ -75,8 +75,6 @@ function UserCart() {
                           ${subtotal.toLocaleString("es-ES")}
                         </div>
                         <div className="col text-center">
-                          <RemoveFromCartBtn bookId={item.product} />
-                          <div className="me-1 d-inline-block" />
                           <EditItemInCartBtn
                             bookId={item.product}
                             price={Number(item.price.replace("$", ""))}
@@ -85,6 +83,8 @@ function UserCart() {
                             subtitle={item.subtitle}
                             currentQuantity={item.qty}
                           />
+                          <div className="me-1 d-inline-block" />
+                          <RemoveFromCartBtn bookId={item.product} />
                         </div>
                       </div>
                     </div>
