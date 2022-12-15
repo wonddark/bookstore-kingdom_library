@@ -1,4 +1,4 @@
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useSearchParams } from "react-router-dom";
 
 type Props = {
   title: string;
@@ -9,8 +9,9 @@ type Props = {
 };
 function BookItem({ title, subtitle, isbn, price, image }: Props) {
   const navigate = useNavigate();
+  const [search] = useSearchParams();
   const viewBookDetails = () => {
-    navigate(`/books/${isbn}`);
+    navigate({ pathname: `/books/${isbn}`, search: search.toString() });
   };
   return (
     <button

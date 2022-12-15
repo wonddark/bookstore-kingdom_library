@@ -1,4 +1,4 @@
-import { useNavigate, useParams } from "react-router-dom";
+import { useNavigate, useParams, useSearchParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { useLazyGetBookDetailsQuery } from "../state/api";
 
@@ -7,8 +7,9 @@ function useBookDetails() {
   const [, setWrongPath] = useState(false);
   const [getBookDetails, { isLoading, data }] = useLazyGetBookDetailsQuery();
   const navigate = useNavigate();
+  const [search] = useSearchParams();
   const backToList = () => {
-    navigate("/books");
+    navigate({ pathname: "/books", search: search.toString() });
   };
   const loadData = () => {
     if (isbn) {
