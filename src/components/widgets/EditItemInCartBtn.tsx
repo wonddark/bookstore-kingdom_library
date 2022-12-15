@@ -11,6 +11,48 @@ type Props = {
   subtitle?: string;
   image?: string;
 };
+
+function EditQuantityModal({
+  isOpen,
+  toggle,
+  quantity,
+  updateQuantity,
+  submit,
+}: {
+  isOpen: boolean;
+  toggle: () => void;
+  quantity: number;
+  updateQuantity: (e: ChangeEvent<HTMLInputElement>) => void;
+  submit: () => void;
+}) {
+  return (
+    <Modal isOpen={isOpen} toggle={toggle} size="sm" centered>
+      <div className="modal-body">
+        <div className="mb-2">
+          <label htmlFor="new_quantity">Nueva cantidad</label>
+          <input
+            id="new_quantity"
+            type="number"
+            value={quantity}
+            onChange={updateQuantity}
+            className="form-control"
+          />
+        </div>
+        <div className="text-end">
+          <button onClick={toggle} className="btn btn-light me-2">
+            <i className="bi bi-x me-2" />
+            Cancelar
+          </button>
+          <button onClick={submit} className="btn btn-primary">
+            <i className="bi bi-check me-2" />
+            Actualizar
+          </button>
+        </div>
+      </div>
+    </Modal>
+  );
+}
+
 function EditItemInCartBtn({
   bookId,
   title,
@@ -59,32 +101,15 @@ function EditItemInCartBtn({
       >
         <i className="bi bi-pencil-square" />
       </button>
-      {
-        <Modal isOpen={isOpen} toggle={toggle} size="sm" centered>
-          <div className="modal-body">
-            <div className="mb-2">
-              <label htmlFor="new_quantity">Nueva cantidad</label>
-              <input
-                id="new_quantity"
-                type="number"
-                value={quantity}
-                onChange={updateQuantity}
-                className="form-control"
-              />
-            </div>
-            <div className="text-end">
-              <button onClick={toggle} className="btn btn-light me-2">
-                <i className="bi bi-x me-2" />
-                Cancelar
-              </button>
-              <button onClick={submit} className="btn btn-primary">
-                <i className="bi bi-check me-2" />
-                Actualizar
-              </button>
-            </div>
-          </div>
-        </Modal>
-      }
+      {isOpen ? (
+        <EditQuantityModal
+          toggle={toggle}
+          isOpen={isOpen}
+          submit={submit}
+          quantity={quantity}
+          updateQuantity={updateQuantity}
+        />
+      ) : null}
     </>
   );
 }
