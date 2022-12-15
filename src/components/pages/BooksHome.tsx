@@ -2,9 +2,10 @@ import BookItem from "../widgets/BookItem";
 import SearchForm from "../widgets/SearchForm";
 import Pagination from "../widgets/Pagination";
 import useBookData from "../../hooks/books-data.hook";
+import BookItemPlaceholder from "../widgets/BookItemPlaceholder";
 
 function BooksHome() {
-  const { data, shouldPaginate } = useBookData();
+  const { data, shouldPaginate, isLoading } = useBookData();
   return (
     <div className="container py-2">
       <div className="row mt-4">
@@ -18,17 +19,21 @@ function BooksHome() {
           shouldPaginate ? " paginated" : ""
         }`}
       >
-        {data.map((item: any) => (
-          <div className="col" key={item.isbn13}>
-            <BookItem
-              title={item.title}
-              subtitle={item.subtitle}
-              isbn={item.isbn13}
-              price={item.price}
-              image={item.image}
-            />
-          </div>
-        ))}
+        {!isLoading
+          ? data.map((item: any) => (
+              <div className="col" key={item.isbn13}>
+                <BookItem
+                  title={item.title}
+                  subtitle={item.subtitle}
+                  isbn={item.isbn13}
+                  price={item.price}
+                  image={item.image}
+                />
+              </div>
+            ))
+          : [0, 1, 2, 3, 4, 5, 6, 7].map((item) => (
+              <BookItemPlaceholder key={item} />
+            ))}
       </div>
     </div>
   );
