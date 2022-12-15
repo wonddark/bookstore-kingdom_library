@@ -1,8 +1,8 @@
 import { useGetBooksQuery, useSearchBooksQuery } from "../../state/api";
-import BookItem from "./BookItem";
-import SearchForm from "./SearchForm";
+import BookItem from "../widgets/BookItem";
+import SearchForm from "../widgets/SearchForm";
 import { useEffect, useState } from "react";
-import Pagination from "./Pagination";
+import Pagination from "../widgets/Pagination";
 import { useSearchParams } from "react-router-dom";
 
 function BooksHome() {

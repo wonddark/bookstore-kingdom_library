@@ -6,13 +6,13 @@ import {
   useParams,
 } from "react-router-dom";
 import Home from "./components/pages/Home";
-import BooksHome from "./components/widgets/BooksHome";
-import BookDetails from "./components/widgets/BookDetails";
+import BooksHome from "./components/pages/BooksHome";
+import BookDetails from "./components/pages/BookDetails";
 import Skeleton from "./components/layout/Skeleton";
-import UserCart from "./components/widgets/UserCart";
-import Authentication from "./components/widgets/Authentication";
-import LogoutControl from "./components/widgets/LogoutControl";
-import Checkout from "./components/widgets/Checkout";
+import UserCart from "./components/pages/UserCart";
+import Authentication from "./components/pages/Authentication";
+import LogoutControl from "./components/pages/LogoutControl";
+import Checkout from "./components/pages/Checkout";
 import { ReactElement } from "react";
 import { useAppSelector } from "./state/hooks";
 import { SESSION_STORE_KEY } from "./state/session.slice";

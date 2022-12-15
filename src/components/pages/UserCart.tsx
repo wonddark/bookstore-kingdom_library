@@ -1,6 +1,6 @@
 import { useGetCartQuery } from "../../state/api-cart";
-import RemoveFromCartBtn from "./RemoveFromCartBtn";
-import PayCartBtn from "./PayCartBtn";
+import RemoveFromCartBtn from "../widgets/RemoveFromCartBtn";
+import PayCartBtn from "../widgets/PayCartBtn";
 
 function UserCart() {
   const { data, isLoading } = useGetCartQuery({});

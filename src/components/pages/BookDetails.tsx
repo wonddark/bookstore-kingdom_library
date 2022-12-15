@@ -1,6 +1,6 @@
 import { Col, Container, Placeholder, Row } from "reactstrap";
 import useBookDetails from "../../hooks/book-details.hook";
-import AddToCartBtn from "./AddToCartBtn";
+import AddToCartBtn from "../widgets/AddToCartBtn";
 import { useAppSelector } from "../../state/hooks";
 import { selectAuthenticated } from "../../state/session.slice";
 
