@@ -21,7 +21,7 @@ function BooksHome() {
       )}
       <div
         className={`row row-cols-1 row-cols-md-2 row-cols-lg-3 row-cols-xl-4 row-cols-xxl-5 books-list${
-          shouldPaginate ? " paginated" : ""
+          shouldPaginate.state ? " paginated" : ""
         }`}
       >
         {!isLoading
