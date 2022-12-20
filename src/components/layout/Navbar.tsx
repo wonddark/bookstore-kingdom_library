@@ -2,6 +2,7 @@ import { Link } from "react-router-dom";
 import { useAppSelector } from "../../state/hooks";
 import { selectAuthenticated, selectUserId } from "../../state/session.slice";
 import { useGetCartQuery } from "../../state/api-cart";
+import { ReactComponent as SiteLogo } from "../../assets/path2611-5.svg";
 
 function Navbar() {
   const state = useAppSelector((state) => state);
@@ -13,7 +14,11 @@ function Navbar() {
       <div className="navbar navbar-expand-md navbar-dark bg-navbar-dark">
         <div className="container-xl">
           <Link className="navbar-brand" to="/">
-            Kingdom Library
+            <SiteLogo
+              style={{ height: "26px", width: "auto", fill: "#ffffff" }}
+              height="26px"
+              width="auto"
+            />
           </Link>
           <button
             className="navbar-toggler"
